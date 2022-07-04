@@ -23,7 +23,7 @@ public class Contact {
 	private String phoneNumber;
 
 	@Column(name = "customer_id")
-	private String customerId;
+	private Long customerId;
 
 	public Long getId() {
 		return id;
@@ -49,11 +49,11 @@ public class Contact {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getCustomerId() {
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 

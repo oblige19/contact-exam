@@ -1,0 +1,1 @@
+INSERT INTO contact(type, phone_number, customer_id) VALUES('MOBILE', '123141', 1)
