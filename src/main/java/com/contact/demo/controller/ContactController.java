@@ -2,6 +2,8 @@ package com.contact.demo.controller;
 
 import java.util.List;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,7 @@ public class ContactController {
 		this.service = service;
 	}
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public List<Contact> findAll() {
 		return service.findAll();
 	}
@@ -37,14 +39,19 @@ public class ContactController {
 		return service.find(id);
 	}
 	
-	@PostMapping("/")
+	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String create(@RequestBody Contact contact) {
 		return service.create(contact);
 	}
 	
-	@PutMapping("/")
+	@PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String update(@RequestBody Contact contact) {
 		return service.update(contact);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		return service.delete(id);
 	}
 	
 }

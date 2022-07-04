@@ -1,6 +1,7 @@
 package com.contact.demo.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import com.contact.demo.service.ContactService;
 
 @Service
 public class ContactServiceImpl implements ContactService {
+	private static final String SUCCESS_MESSAGE = "Success";
 
 	private final ContactRepository repository;
 
@@ -24,25 +26,37 @@ public class ContactServiceImpl implements ContactService {
 
 	@Override
 	public Contact find(Long id) {
-		return repository.getReferenceById(id);
+		Optional<Contact> result = repository.findById(id);
+		
+		Contact contact = null;
+		
+		if (result.isPresent()) {
+			contact = result.get();
+		}
+		else {
+			// we didn't find the contact
+			throw new RuntimeException("Did not find contact id - " + id);
+		}
+		
+		return contact;
 	}
 
 	@Override
 	public String create(Contact contact) {
-		// TODO Auto-generated method stub
-		return null;
+		repository.save(contact);
+		return SUCCESS_MESSAGE;
 	}
 
 	@Override
 	public String update(Contact contact) {
-		// TODO Auto-generated method stub
-		return null;
+		repository.save(contact);
+		return SUCCESS_MESSAGE;
 	}
 
 	@Override
 	public String delete(Long id) {
 		repository.deleteById(id);
-		return null;
+		return SUCCESS_MESSAGE;
 	}
 
 	@Override
